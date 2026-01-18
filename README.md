@@ -24,11 +24,11 @@
 ## Quick Start
 
 ### Install from this Fork
-Since this is a development fork, install it in editable mode or directly from the source:
-```sh
-# Clone the repository
-git clone [https://github.com/seu-usuario/mssql-cli.git](https://github.com/seu-usuario/mssql-cli.git)
-cd mssql-cli
 
-# Install using uv (recommended) or pip
-uv pip install -e .
+```sh
+To install global, run:
+uv tool install --force git+https://github.com/rubgithub/mssql-cli.git@py311-fix
+
+Run:
+mssql-cli -S localhost -U sa -C
+```
