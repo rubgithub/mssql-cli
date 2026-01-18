@@ -34,6 +34,12 @@ dependencies = [
 mssql-cli = "mssqlcli.main:main"
 
 [tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"mssqlcli.packages.mssqlliterals" = ["*.json"]
+
+[tool.setuptools]
 zip-safe = false
 
 [tool.setuptools.packages.find]
