@@ -27,6 +27,7 @@ dependencies = [
     "tabulate",
     "pygments",
     "applicationinsights",
+    "cli-helpers>=2.7.0"
 ]
 
 [project.scripts]
