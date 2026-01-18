@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mssql-cli"
+version = "1.1.0.dev0"
+description = "A command-line client for SQL Server"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "BSD-3-Clause" }
+
+authors = [
+    { name = "Microsoft" }
+]
+
+dependencies = [
+    "click>=7.0",
+    "six",
+    "pyodbc>=4.0",
+    "prompt-toolkit>=3.0",
+    "sqlparse",
+    "configobj",
+    "terminaltables",
+    "humanize",
+    "pendulum",
+    "tabulate",
+    "pygments",
+    "applicationinsights",
+]
+
+# 🔴 AQUI É O PONTO MAIS IMPORTANTE
+[project.scripts]
+mssql-cli = "mssqlcli.main:main"
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.packages.find]
+include = ["mssqlcli*"]
+
