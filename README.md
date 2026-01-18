@@ -1,7 +1,7 @@
 [![Custom Version](https://img.shields.io/badge/version-1.1.0.dev2601181416-orange)](https://github.com/seu-usuario/mssql-cli)
 [![Python versions](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
 
-# mssql-cli (Modernized Fork)
+# mssql-cli (Python 3.10+ Fork)
 
 > **FORK NOTE:** This is a community-maintained fork updated to support **Python 3.10, 3.11, and 3.12**. It includes patches for legacy dependencies (e.g., `collections.abc`) and integrates modern `.NET` binaries for the SqlToolsService to ensure compatibility with current environments.
 
