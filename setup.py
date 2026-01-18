@@ -39,7 +39,6 @@ install_requirements = [
     'applicationinsights>=0.11.1',
     'future>=0.16.0',
     'wheel>=0.29.0',
-    'enum34>=1.1.6;python_version<"3.4"'
 ]
 
 with open("README.md", "r") as fh:
@@ -59,7 +58,20 @@ setup(
     description=description,
     long_description=long_description,
     long_description_content_type='text/markdown',
-    install_requires=install_requirements,
+    install_requires=[
+        'cli_helpers >= 2.2.1',
+        'click >= 7.0',
+        'pyodbc >= 4.0.32',
+        'sqlparse >= 0.3.0',
+        'configobj >= 5.0.6',
+        'humanize >= 0.5.1',
+        'prompt_toolkit >= 2.0.6, < 4.0.0',
+        'applicationinsights >= 0.11.9',  
+        'pendulum >= 2.1.2',
+        'Pygments >= 2.0',      
+        'tabulate >= 0.8.0',    
+        'terminaltables >= 3.1.0',
+    ],
     include_package_data=True,
     scripts=[
         'mssql-cli.bat',
@@ -77,6 +89,10 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Programming Language :: SQL',
         'Topic :: Database',
         'Topic :: Database :: Front-Ends',
