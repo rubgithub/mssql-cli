@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mssql-cli"
-version = "1.1.0.dev20260118
+version = "1.1.0.dev20260118"
 description = "A command-line client for SQL Server"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -28,7 +28,6 @@ dependencies = [
     "pygments",
     "applicationinsights",
 ]
-
 
 [project.scripts]
 mssql-cli = "mssqlcli.main:main"
