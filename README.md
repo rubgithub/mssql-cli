@@ -3,7 +3,11 @@
 
 # mssql-cli (Modernized Fork)
 
+<<<<<<< HEAD
 > **FORK NOTE:** This is a community-maintained fork updated to support **Python 3.10, 3.11, and 3.12**. It includes patches for legacy dependencies (e.g., `collections.abc`) and integrates modern `.NET` binaries for the SqlToolsService to ensure compatibility with current environments.
+=======
+> **FORK NOTE:** This is a community-maintained fork updated to support **Python 3.10, 3.11, and 3.12**. It includes patches for legacy dependencies (e.g., `collections.abc`) and integrates SqlToolsService to ensure compatibility with current environments.
+>>>>>>> 632a2a9f1188ac221fa45f483d8bd82d3023e217
 
 > **DISCLAIMER:** This project is provided "as is", without warranty of any kind, express or implied. Use it at your own risk. This fork is not officially affiliated with Microsoft or the original dbcli maintainers.
 
@@ -24,6 +28,7 @@
 ## Quick Start
 
 ### Install from this Fork
+<<<<<<< HEAD
 Since this is a development fork, install it in editable mode or directly from the source:
 ```sh
 # Clone the repository
@@ -32,3 +37,12 @@ cd mssql-cli
 
 # Install using uv (recommended) or pip
 uv pip install -e .
+=======
+Since this is a development fork, install it from the source:
+```sh
+# Install
+uv tool install --force git+https://github.com/rubgithub/mssql-cli.git@py311-fix
+
+# Run:
+mssql-cli -S localhost -U sa -C
+>>>>>>> 632a2a9f1188ac221fa45f483d8bd82d3023e217
