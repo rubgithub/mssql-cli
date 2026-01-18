@@ -24,7 +24,7 @@
 ## Quick Start
 
 ### Install from this Fork
-Since this is a development fork, install it in editable mode or directly from the source:
+Since this is a development fork, install it from the source:
 ```sh
 # Install
 uv tool install --force git+https://github.com/rubgithub/mssql-cli.git@py311-fix
