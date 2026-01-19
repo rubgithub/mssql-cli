@@ -47,7 +47,7 @@ def download_sqltoolsservice_binaries():
     if dir_name and not os.path.exists(dir_name):
         os.makedirs(dir_name)
 
-    githubUrl = 'https://github.com/microsoft/sqltoolsservice/releases/download/v{}/{}'.format(SQLTOOLSSERVICE_RELEASE, packageFileName)
+    githubUrl = 'https://github.com/microsoft/sqltoolsservice/releases/download/{}/{}'.format(SQLTOOLSSERVICE_RELEASE, packageFileName)
     print('Downloading {}'.format(githubUrl))
     r = requests.get(githubUrl)
     with open(packageFilePath, 'wb') as f:
