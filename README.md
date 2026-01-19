@@ -73,9 +73,9 @@ _The resulting binary will be available in the dist/ folder._
 
 ### 🖥️ Multi-Platform Support (Windows & Linux)
 
-| Windows Autocomplete | Linux (WSL) Execution |
-| ![mssql-cli Autocomplete](https://github.com/dbcli/mssql-cli/raw/main/screenshots/wezterm-windows.png) | ![mssql-cli Linux WSL](wezterm-windows.png) |
-| ![mssql-cli Autocomplete](https://github.com/dbcli/mssql-cli/raw/main/screenshots/wsl-linux.png) | ![mssql-cli Linux WSL](wsl-linux.png.png) |
+| Windows  | Linux (WSL)  |
+| ![mssql-cli Autocomplete](https://raw.githubusercontent.com/rubgithub/mssql-cli/py311-fix/screenshots/wezterm-windows.png) | ![mssql-cli Windows](wezterm-windows.png) |
+| ![mssql-cli Autocomplete](https://raw.githubusercontent.com/rubgithub/mssql-cli/py311-fix/screenshots/wsl-linux.png) 		 | ![mssql-cli Linux WSL](wsl-linux.png) |
 
 ---
 
