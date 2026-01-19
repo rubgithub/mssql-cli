@@ -30,7 +30,7 @@
 - **Auto-completion**: Fewer keystrokes needed to complete complicated queries.
 - **Syntax highlighting**: Highlights T-SQL keywords.
 - **Modern Python Support**: Fully compatible with Python 3.10, 3.11, and 3.12.
-- **Standalone Binary**: Available as a single executable for Windows (no Python required).
+- **Standalone Binary**: Available as a single executable for Windows/Linux/MacOS (no Python required).
 - **Privacy Focused**: Microsoft telemetry collection has been removed to avoid execution errors.
 - **Updated Engine (.NET 8):** We have migrated the `SqlToolsService` from .NET Core 3.1 to **.NET 8 (LTS)**.
 
