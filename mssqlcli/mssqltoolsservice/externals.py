@@ -1,27 +1,16 @@
-from __future__ import print_function
-
 import os
 import sys
+import platform
 import tarfile
 import zipfile
-from future.standard_library import install_aliases
 import requests
 import utility
-import platform
 
-install_aliases()
-
-# SQLTOOLSSERVICE_RELEASE = "v3.0.0-release.72"
-# Supported platform key's must match those in mssqlscript's setup.py.
-# updated releases
+# SQLTOOLSSERVICE_RELEASE version
 SQLTOOLSSERVICE_RELEASE = "5.0.20251227.1"
+SQLTOOLSSERVICE_BASE = os.path.join(utility.ROOT_DIR, 'sqltoolsservice')
 
-SQLTOOLSSERVICE_BASE = os.path.join(utility.ROOT_DIR, 'sqltoolsservice/')
-
-SQLTOOLSSERVICE_BASE = os.path.join(utility.ROOT_DIR, 'sqltoolsservice/')
-
-# URLs and file names updates to v5.x
-# URLs e file names atualizados para incluir osx-arm64
+# Map platforms
 SUPPORTED_PLATFORMS = {
     'manylinux1_x86_64': 'Microsoft.SqlTools.ServiceLayer-linux-x64-net8.0.tar.gz',
     'macosx_arm64': 'Microsoft.SqlTools.ServiceLayer-osx-arm64-net8.0.tar.gz',
@@ -30,11 +19,12 @@ SUPPORTED_PLATFORMS = {
     'win32': 'Microsoft.SqlTools.ServiceLayer-win-x86-net8.0.zip'
 }
 
+TARGET_DIRECTORY = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', 'bin'))
+
 def get_current_platform():
-    """ Retorna a chave correta para o SUPPORTED_PLATFORMS baseada no SO atual """
+    """Identify the platform to download"""
     plat = sys.platform
     arch = platform.machine().lower()
-
     if plat == 'win32':
         return 'win_amd64' if '64' in arch else 'win32'
     elif plat == 'linux':
@@ -44,13 +34,18 @@ def get_current_platform():
     return None
 
 def download_sqltoolsservice_binaries():
-    # Agora baixa apenas o binário necessário para a plataforma atual (economiza tempo no CI)
+    """Download the specific binary"""
     current_plat = get_current_platform()
+    if not current_plat:
+        print("Platform not supported")
+        return
+
     packageFileName = SUPPORTED_PLATFORMS[current_plat]
-    
     packageFilePath = os.path.join(SQLTOOLSSERVICE_BASE, current_plat, packageFileName)
-    if not os.path.exists(os.path.dirname(packageFilePath)):
-        os.makedirs(os.path.dirname(packageFilePath))
+    
+    dir_name = os.path.dirname(packageFilePath)
+    if dir_name and not os.path.exists(dir_name):
+        os.makedirs(dir_name)
 
     githubUrl = 'https://github.com/microsoft/sqltoolsservice/releases/download/v{}/{}'.format(SQLTOOLSSERVICE_RELEASE, packageFileName)
     print('Downloading {}'.format(githubUrl))
@@ -58,51 +53,19 @@ def download_sqltoolsservice_binaries():
     with open(packageFilePath, 'wb') as f:
         f.write(r.content)
 
-TARGET_DIRECTORY = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', 'bin'))
-
-def download_sqltoolsservice_binaries():
-    """
-        Download each for the plaform specific sqltoolsservice packages
-    """
-    for packageFilePath in SUPPORTED_PLATFORMS.values():
-        if not os.path.exists(os.path.dirname(packageFilePath)):
-            os.makedirs(os.path.dirname(packageFilePath))
-
-        packageFileName = os.path.basename(packageFilePath)
-        githubUrl = 'https://github.com/microsoft/sqltoolsservice/releases/download/{}/{}'.format(SQLTOOLSSERVICE_RELEASE, packageFileName)
-        print('Downloading {}'.format(githubUrl))
-        r = requests.get(githubUrl)
-        with open(packageFilePath, 'wb') as f:
-            f.write(r.content)
-
-def copy_sqltoolsservice(platform):
-    """
-        For each supported platform, build a universal wheel.
-    """
-    # Clean up dangling directories if previous run was interrupted.
+def copy_sqltoolsservice(platform_key):
+    """Extract the binary to bin folder"""
     utility.clean_up(directory=TARGET_DIRECTORY)
+    
+    packageFileName = SUPPORTED_PLATFORMS[platform_key]
+    copy_file_path = os.path.join(SQLTOOLSSERVICE_BASE, platform_key, packageFileName)
 
-    if not platform or platform not in SUPPORTED_PLATFORMS:
-        print('{} is not supported.'.format(platform))
-        print('Please provide a valid platform flag.' +
-              '[win32, win_amd64, manylinux1_x86_64, macosx_10_11_intel]')
-        sys.exit(1)
-
-    copy_file_path = SUPPORTED_PLATFORMS[platform]
-
-    print('Sqltoolsservice archive found at {}'.format(copy_file_path))
+    print('Extracting from {}'.format(copy_file_path))
     if copy_file_path.endswith('tar.gz'):
         compressed_file = tarfile.open(name=copy_file_path, mode='r:gz')
-    elif copy_file_path.endswith('.zip'):
+    else:
         compressed_file = zipfile.ZipFile(copy_file_path)
 
     if not os.path.exists(TARGET_DIRECTORY):
         os.makedirs(TARGET_DIRECTORY)
-
-    print(u'Bin placing sqltoolsservice for this platform: {}.'.format(platform))
-    print(u'Extracting files from {}'.format(copy_file_path))
     compressed_file.extractall(TARGET_DIRECTORY)
-
-
-def clean_up_sqltoolsservice():
-    utility.clean_up(directory=TARGET_DIRECTORY)
