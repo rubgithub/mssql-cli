@@ -38,7 +38,7 @@
 
 ### Option 1: Standalone Executable
 
-## 🖥️ Windows
+## 🪟️ Windows
 1. **Download**  the latest `mssql-cli-windows.exe` from our [Releases Page](https://github.com/rubgithub/mssql-cli/releases). 
 ```powershell
 .\mssql-cli-windows.exe -S localhost -U sa -C
@@ -50,6 +50,25 @@
 2. **Grant execution permission**:
 ```bash
 chmod +x mssql-cli-linux
+./mssql-cli-linux -S localhost -U sa -C
+```
+
+## 🍎 MacOS (Sonoma & Apple Silicon)
+_Note: Verified via GitHub Actions. Manual physical testing is pending._
+
+1. **Download** the `mssql-cli-macos` from our [Releases Page](https://github.com/rubgithub/mssql-cli/releases). 
+2. **Grant execution permission**:
+```bash
+chmod +x mssql-cli-macos
+```
+
+2. **Remove the "Developer cannot be verified" quarantine flag**
+```bash
+xattr -d com.apple.quarantine mssql-cli-macos
+```
+
+2. **Run it**
+```bash
 ./mssql-cli-linux -S localhost -U sa -C
 ```
 
