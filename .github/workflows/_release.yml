@@ -1,12 +1,17 @@
-name: Build and Release
+# Main workflow name displayed in the Actions tab
+name: "CI/CD: Build and Package Standalone Binaries"
 
 on:
   push:
+    branches:
+      - py311-fix  # Runs test builds on this branch
     tags:
-      - 'v*'
+      - 'v*'      # Triggers official release creation on version tags
+  workflow_dispatch: # Allows manual trigger from the GitHub Actions UI
 
 jobs:
   build:
+    # Dynamic job name to differentiate runners (Windows, Linux, macOS)
     name: Build for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -18,9 +23,13 @@ jobs:
           - os: ubuntu-latest
             artifact_name: mssql-cli-linux
             path_sep: ":"
+          - os: macos-latest  # macOS Sonoma (Apple Silicon ARM64)
+            artifact_name: mssql-cli-macos
+            path_sep: ":"
 
     steps:
       - uses: actions/checkout@v4
+      
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
         with:
@@ -31,7 +40,13 @@ jobs:
           uv pip install .
           uv pip install pyinstaller requests future
 
+      - name: Install System Dependencies (macOS)
+        # Required for pyodbc to find unixodbc libraries on Apple Silicon
+        if: matrix.os == 'macos-latest'
+        run: brew install unixodbc
+
       - name: Download binaries
+        # Executes the platform-specific logic to fetch .NET 8 binaries
         run: uv run dev_setup.py
 
       - name: PyInstaller Build
@@ -44,25 +59,18 @@ jobs:
           --hidden-import "pyodbc" \
           mssqlcli/main.py
 
-      # --- MAC OS TEST ---
       - name: Validate Binary Execution (${{ matrix.os }})
         shell: bash
         run: |
-          # Define executable path
           EXE_PATH="dist/${{ matrix.artifact_name }}"
-          
-          # Exec permission
           chmod +x "$EXE_PATH"
-          
-          # Test executable
           echo "Testing binary version and engine initialization..."
           "$EXE_PATH" --version
-          
-          # Binary OK
           echo "Binary validation successful on ${{ matrix.os }}!"
-      # --- MAC OS TEST ---
-      
-      - name: Release
+
+      - name: Create GitHub Release
+        # Only creates a public release if the push is a version tag (e.g., v1.1.0)
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: dist/${{ matrix.artifact_name }}
