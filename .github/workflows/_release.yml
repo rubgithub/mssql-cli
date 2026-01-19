@@ -2,11 +2,8 @@ name: Build and Release
 
 on:
   push:
-    branches:
-      - py311-fix  # Roda builds de teste neste branch
     tags:
-      - 'v*'      # Roda build e cria release oficial
-  workflow_dispatch: # Permite rodar manualmente pelo botão no GitHub Actions
+      - 'v*'
 
 jobs:
   build:
@@ -21,13 +18,9 @@ jobs:
           - os: ubuntu-latest
             artifact_name: mssql-cli-linux
             path_sep: ":"
-          - os: macos-latest  # macOS Sonoma (Apple Silicon ARM64)
-            artifact_name: mssql-cli-macos
-            path_sep: ":"
 
     steps:
       - uses: actions/checkout@v4
-      
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
         with:
@@ -51,18 +44,25 @@ jobs:
           --hidden-import "pyodbc" \
           mssqlcli/main.py
 
+      # --- MAC OS TEST ---
       - name: Validate Binary Execution (${{ matrix.os }})
         shell: bash
         run: |
+          # Define executable path
           EXE_PATH="dist/${{ matrix.artifact_name }}"
+          
+          # Exec permission
           chmod +x "$EXE_PATH"
+          
+          # Test executable
           echo "Testing binary version and engine initialization..."
           "$EXE_PATH" --version
+          
+          # Binary OK
           echo "Binary validation successful on ${{ matrix.os }}!"
-
+      # --- MAC OS TEST ---
+      
       - name: Release
-        # Esta trava garante que só cria a release se houver uma TAG (v1.0.0, etc)
-        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: dist/${{ matrix.artifact_name }}

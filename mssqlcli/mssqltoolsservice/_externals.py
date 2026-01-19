@@ -7,7 +7,6 @@ import zipfile
 from future.standard_library import install_aliases
 import requests
 import utility
-import platform
 
 install_aliases()
 
@@ -21,42 +20,16 @@ SQLTOOLSSERVICE_BASE = os.path.join(utility.ROOT_DIR, 'sqltoolsservice/')
 SQLTOOLSSERVICE_BASE = os.path.join(utility.ROOT_DIR, 'sqltoolsservice/')
 
 # URLs and file names updates to v5.x
-# URLs e file names atualizados para incluir osx-arm64
 SUPPORTED_PLATFORMS = {
-    'manylinux1_x86_64': 'Microsoft.SqlTools.ServiceLayer-linux-x64-net8.0.tar.gz',
-    'macosx_arm64': 'Microsoft.SqlTools.ServiceLayer-osx-arm64-net8.0.tar.gz',
-    'macosx_x64': 'Microsoft.SqlTools.ServiceLayer-osx-x64-net8.0.tar.gz',
-    'win_amd64': 'Microsoft.SqlTools.ServiceLayer-win-x64-net8.0.zip',
-    'win32': 'Microsoft.SqlTools.ServiceLayer-win-x86-net8.0.zip'
+    'manylinux1_x86_64': SQLTOOLSSERVICE_BASE + 'manylinux1/' +
+                         'Microsoft.SqlTools.ServiceLayer-linux-x64-net8.0.tar.gz',
+    'macosx_10_11_intel': SQLTOOLSSERVICE_BASE + 'macosx_10_11_intel/' +
+                          'Microsoft.SqlTools.ServiceLayer-osx-x64-net8.0.tar.gz',
+    'win_amd64': SQLTOOLSSERVICE_BASE + 'win_amd64/' +
+                 'Microsoft.SqlTools.ServiceLayer-win-x64-net8.0.zip',
+    'win32': SQLTOOLSSERVICE_BASE + 'win32/' +
+             'Microsoft.SqlTools.ServiceLayer-win-x86-net8.0.zip'
 }
-
-def get_current_platform():
-    """ Retorna a chave correta para o SUPPORTED_PLATFORMS baseada no SO atual """
-    plat = sys.platform
-    arch = platform.machine().lower()
-
-    if plat == 'win32':
-        return 'win_amd64' if '64' in arch else 'win32'
-    elif plat == 'linux':
-        return 'manylinux1_x86_64'
-    elif plat == 'darwin':
-        return 'macosx_arm64' if 'arm' in arch or 'aarch64' in arch else 'macosx_x64'
-    return None
-
-def download_sqltoolsservice_binaries():
-    # Agora baixa apenas o binário necessário para a plataforma atual (economiza tempo no CI)
-    current_plat = get_current_platform()
-    packageFileName = SUPPORTED_PLATFORMS[current_plat]
-    
-    packageFilePath = os.path.join(SQLTOOLSSERVICE_BASE, current_plat, packageFileName)
-    if not os.path.exists(os.path.dirname(packageFilePath)):
-        os.makedirs(os.path.dirname(packageFilePath))
-
-    githubUrl = 'https://github.com/microsoft/sqltoolsservice/releases/download/v{}/{}'.format(SQLTOOLSSERVICE_RELEASE, packageFileName)
-    print('Downloading {}'.format(githubUrl))
-    r = requests.get(githubUrl)
-    with open(packageFilePath, 'wb') as f:
-        f.write(r.content)
 
 TARGET_DIRECTORY = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', 'bin'))
 
