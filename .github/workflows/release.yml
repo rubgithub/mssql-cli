@@ -38,6 +38,10 @@ jobs:
           uv pip install .
           uv pip install pyinstaller requests future
 
+      - name: Install System Dependencies (macOS)
+        if: matrix.os == 'macos-latest'
+        run: brew install unixodbc
+
       - name: Download binaries
         run: uv run dev_setup.py
 
