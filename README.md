@@ -38,10 +38,19 @@
 
 ### Option 1: Standalone Executable
 
-Download the latest `mssql-cli-windows.exe` from our [Releases Page](https://github.com/rubgithub/mssql-cli/releases). 
-No Python installation is required. Just download and run:
+## 🖥️ Windows
+1. **Download**  the latest `mssql-cli-windows.exe` from our [Releases Page](https://github.com/rubgithub/mssql-cli/releases). 
 ```powershell
 .\mssql-cli-windows.exe -S localhost -U sa -C
+```
+
+## 🐧 Linux / WSL Usage
+
+1. **Download** the `mssql-cli-linux` from our [Releases Page](https://github.com/rubgithub/mssql-cli/releases). 
+2. **Grant execution permission**:
+```bash
+chmod +x mssql-cli-linux
+./mssql-cli-linux -S <server> -U <user> -P <password>
 ```
 
 ### Option 2: Managed Installation via uv
