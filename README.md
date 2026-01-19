@@ -1,34 +1,39 @@
-[![Custom Version](https://img.shields.io/badge/version-1.1.0.dev2601181416-orange)](https://github.com/seu-usuario/mssql-cli)
-[![Python versions](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
+# mssql-cli (Modernized Fork)
 
-# mssql-cli (Python 3.10+ Fork)
+[![Build and Release](https://github.com/rubgithub/mssql-cli/actions/workflows/release.yml/badge.svg?branch=py311-fix)](https://github.com/rubgithub/mssql-cli/actions/workflows/release.yml)
 
-> **FORK NOTE:** This is a community-maintained fork updated to support **Python 3.10, 3.11, and 3.12**. It includes patches for legacy dependencies (e.g., `collections.abc`) and integrates binaries for the SqlToolsService to ensure compatibility with current environments.
+> [!IMPORTANT]
+> **Active Development:** The updated version of this tool, including support for **Python 3.12+**, **.NET 8.0**, and **macOS Apple Silicon**, is located in the `py311-fix` branch.
 
-> **DISCLAIMER:** This project is provided "as is", without warranty of any kind, express or implied. Use it at your own risk. This fork is not officially affiliated with Microsoft or the original dbcli maintainers.
+## 🚀 Get the Working Version
 
-> **DEPRECATION NOTICE (Original Project):** mssql-cli is on the path to deprecation, and will be fully replaced by the new [go-sqlcmd](https://learn.microsoft.com/sql/tools/sqlcmd/go-sqlcmd-utility) utility once it becomes generally available.
+The original `mssql-cli` is currently unmaintained. This fork fixes critical issues with modern Python versions and modern operating systems.
 
-[**mssql-cli**](https://github.com/dbcli/mssql-cli) is an interactive command line query tool for SQL Server. This open source tool works cross-platform and proud to be a part of the [dbcli](https://github.com/dbcli) community. 
+### 1. Browse the Updated Code
+Check out the active branch here:
+👉 **[mssql-cli (branch: py311-fix)](https://github.com/rubgithub/mssql-cli/tree/py311-fix)**
 
-![mssql-cli Autocomplete](https://github.com/dbcli/mssql-cli/raw/main/screenshots/mssql-cli-autocomplete.gif)
+### 2. Download Standalone Binaries
+If you don't want to manage Python environments, we provide pre-compiled binaries for:
+* 🪟 **Windows** (x64)
+* 🐧 **Linux** (x64)
+* 🍎 **macOS** (ARM64 - M1/M2/M3)
 
-## Key Features
-- **Auto-completion**: fewer keystrokes needed to complete complicated queries.
-- **Syntax highlighting**: highlights T-SQL keywords.
-- **Query history**: easily complete an auto-suggested query that was previously executed.
-- **Configuration file support**: customize the mssql-cli experience for your needs.
-- **Multi-line queries**: execute multiple queries at once using the multi-line edit mode.
-- **Modern Python Support**: Fully compatible with Python 3.10+.
+Download them from the **[Releases Section](https://github.com/rubgithub/mssql-cli/releases)**.
 
-## Quick Start
+---
 
-### Install from this Fork
+## ✨ Improvements in this Fork
 
-```sh
-To install global, run:
-uv tool install --force git+https://github.com/rubgithub/mssql-cli.git@py311-fix
+* **Python Compatibility:** Fixed for 3.10, 3.11, and 3.12.
+* **Modern Engine:** Upgraded `SqlToolsService` to **.NET 8.0**.
+* **Privacy Focused**: Microsoft telemetry collection has been removed to avoid execution errors.
+* **Native macOS:** First version to support Apple Silicon natively (no Rosetta required).
+* **Automated CI/CD:** Fully automated builds using GitHub Actions.
 
-Run:
-mssql-cli -S localhost -U sa -C
-```
+## 📦 Installation via uv
+
+You can install this fork directly using `uv`:
+
+```bash
+uv tool install git+[https://github.com/rubgithub/mssql-cli.git@py311-fix](https://github.com/rubgithub/mssql-cli.git@py311-fix)
