@@ -50,7 +50,7 @@
 2. **Grant execution permission**:
 ```bash
 chmod +x mssql-cli-linux
-./mssql-cli-linux -S <server> -U <user> -P <password>
+./mssql-cli-linux -S localhost -U sa -C
 ```
 
 ### Option 2: Managed Installation via uv
