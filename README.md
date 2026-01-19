@@ -4,6 +4,7 @@
 
 > [!IMPORTANT]
 > **Active Development:** The updated version of this tool, including support for **Python 3.12+**, **.NET 8.0**, and **macOS Apple Silicon**, is located in the `py311-fix` branch.
+> [mssql-cli (branch: py311-fix)](https://github.com/rubgithub/mssql-cli/tree/py311-fix)
 
 ## 🚀 Get the Working Version
 
