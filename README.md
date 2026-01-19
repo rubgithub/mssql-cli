@@ -20,7 +20,8 @@
 
 ![mssql-cli Autocomplete](https://github.com/dbcli/mssql-cli/raw/main/screenshots/mssql-cli-autocomplete.gif)
 
-### 🖥️ Multi-Platform Support (Windows & Linux)
+### 🖥️ Multi-Platform Support (Windows, Linux and MacOS) 
+_MacOS Verified via GitHub Actions. Manual physical testing is pending._
 
 ![mssql-cli Windows](https://raw.githubusercontent.com/rubgithub/mssql-cli/py311-fix/screenshots/wezterm-windows.png)
 
@@ -31,7 +32,7 @@
 - **Syntax highlighting**: Highlights T-SQL keywords.
 - **Modern Python Support**: Fully compatible with Python 3.10, 3.11, and 3.12.
 - **Standalone Binary**: Available as a single executable for Windows/Linux/MacOS (no Python required).
-- **Privacy Focused**: Microsoft telemetry collection has been removed to avoid execution errors.
+- **Privacy Focused**: Microsoft telemetry collection has been removed.
 - **Updated Engine (.NET 8):** We have migrated the `SqlToolsService` from .NET Core 3.1 to **.NET 8 (LTS)**.
 
 ## Installation and Usage
@@ -108,7 +109,7 @@ This fork was made possible through an intensive technical collaboration with **
 The AI acted as a core technical partner in:
 
 * **Architecture Migration:** Planning and executing the jump from the legacy .NET Core 3.1 to the modern **.NET 8 (LTS)**.
-* **CI/CD Automation:** Designing the multi-platform GitHub Actions pipeline to enable simultaneous, automated builds for both **Windows** and **Linux**.
+* **CI/CD Automation:** Designing the multi-platform GitHub Actions pipeline to enable simultaneous, automated builds for both **Windows**, **Linux** and **MacOS**.
 * **Dependency Resolution:** Troubleshooting the `SqlToolsService` integration and ensuring a seamless transition to a **standalone, self-contained** binary distribution.
 * **Modernization:** Refactoring legacy Python scripts and fixing dependency bottlenecks to ensure full compatibility with **Python 3.10, 3.11, and 3.12**.
 
