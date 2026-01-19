@@ -20,6 +20,12 @@
 
 ![mssql-cli Autocomplete](https://github.com/dbcli/mssql-cli/raw/main/screenshots/mssql-cli-autocomplete.gif)
 
+### 🖥️ Multi-Platform Support (Windows & Linux)
+
+![mssql-cli Windows](https://raw.githubusercontent.com/rubgithub/mssql-cli/py311-fix/screenshots/wezterm-windows.png)
+
+![mssql-cli Linux](https://raw.githubusercontent.com/rubgithub/mssql-cli/py311-fix/screenshots/wsl-linux.png)
+
 ## Key Features
 - **Auto-completion**: Fewer keystrokes needed to complete complicated queries.
 - **Syntax highlighting**: Highlights T-SQL keywords.
@@ -27,8 +33,6 @@
 - **Standalone Binary**: Available as a single executable for Windows (no Python required).
 - **Privacy Focused**: Microsoft telemetry collection has been removed to avoid execution errors.
 - **Updated Engine (.NET 8):** We have migrated the `SqlToolsService` from .NET Core 3.1 to **.NET 8 (LTS)**.
-
----
 
 ## Installation and Usage
 
@@ -68,18 +72,6 @@ uv run pyinstaller --onefile --name "mssql-cli" `
 
 
 _The resulting binary will be available in the dist/ folder._	
-
----
-
-### 🖥️ Multi-Platform Support (Windows & Linux)
-
-| Windows  | Linux (WSL)  |
-| ![mssql-cli Autocomplete](https://raw.githubusercontent.com/rubgithub/mssql-cli/py311-fix/screenshots/wezterm-windows.png) | ![mssql-cli Windows](wezterm-windows.png) |
-| ![mssql-cli Autocomplete](https://raw.githubusercontent.com/rubgithub/mssql-cli/py311-fix/screenshots/wsl-linux.png) 		 | ![mssql-cli Linux WSL](wsl-linux.png) |
-
----
-
----
 
 ## 🤝 Acknowledgments
 
