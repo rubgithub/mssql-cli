@@ -2,7 +2,7 @@
 [![Python versions](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
 [![Build and Release EXE](https://github.com/rubgithub/mssql-cli/actions/workflows/release.yml/badge.svg)](https://github.com/rubgithub/mssql-cli/actions/workflows/release.yml)
 
-# mssql-cli (3.10+ Fork)
+# mssql-cli (3.10+ Fork Windows Only)
 
 > **DEPRECATION NOTICE (Original Project):** mssql-cli is on the path to deprecation, and will be fully replaced by the new [go-sqlcmd](https://learn.microsoft.com/sql/tools/sqlcmd/go-sqlcmd-utility) utility once it becomes generally available.
 
