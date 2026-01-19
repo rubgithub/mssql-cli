@@ -124,3 +124,12 @@ env*/
 # cert and config files for Packages.Microsoft publishing
 release_scripts/Packages.Microsoft/private.pem
 release_scripts/Packages.Microsoft/config.json
+
+# --- Build & Packaging (PyInstaller/setuptools) ---
+build/
+dist/
+*.egg-info/
+.eggs/
+# Arquivos de log e spec do PyInstaller
+*.spec
+pyinstaller-config.json
