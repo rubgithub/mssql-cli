@@ -4,6 +4,8 @@
 
 # mssql-cli (3.10+ Fork)
 
+> **DEPRECATION NOTICE (Original Project):** mssql-cli is on the path to deprecation, and will be fully replaced by the new [go-sqlcmd](https://learn.microsoft.com/sql/tools/sqlcmd/go-sqlcmd-utility) utility once it becomes generally available.
+
 > **FORK NOTE:** This is a community-maintained fork updated to support **Python 3.10, 3.11, and 3.12**. It includes patches for legacy dependencies and integrates updated binaries for the SqlToolsService to ensure compatibility with current environments. **Telemetry has been completely disabled in this fork for better stability and privacy.**
 
 > **DISCLAIMER:** This project is provided "as is", without warranty of any kind. This fork is not officially affiliated with Microsoft or the original dbcli maintainers.
