@@ -44,7 +44,7 @@ If you use uv, you can install the tool globally:
 uv tool install git+https://github.com/rubgithub/mssql-cli.git@py311-fix
 ```
 
-# Option 3: Building from Source
+### Option 3: Building from Source
 
 ```powershell
 git clone https://github.com/rubgithub/mssql-cli.git
