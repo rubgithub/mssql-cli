@@ -1,8 +1,8 @@
 [![Custom Version](https://img.shields.io/badge/version-1.1.0.dev2601181416-orange)](https://github.com/rubgithub/mssql-cli)
 [![Python versions](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
-[![Build and Release EXE](https://github.com/rubgithub/mssql-cli/actions/workflows/release.yml/badge.svg)](https://github.com/rubgithub/mssql-cli/actions/workflows/release.yml)
+[![Build and Release](https://github.com/rubgithub/mssql-cli/actions/workflows/release.yml/badge.svg)](https://github.com/rubgithub/mssql-cli/actions/workflows/release.yml)
 
-# mssql-cli (3.10+ Fork Windows Only)
+# mssql-cli (3.10+ Multi-Platform Fork)
 
 > **DEPRECATION NOTICE (Original Project):** mssql-cli is on the path to deprecation, and will be fully replaced by the new [go-sqlcmd](https://learn.microsoft.com/sql/tools/sqlcmd/go-sqlcmd-utility) utility once it becomes generally available.
 
@@ -26,12 +26,14 @@
 - **Modern Python Support**: Fully compatible with Python 3.10, 3.11, and 3.12.
 - **Standalone Binary**: Available as a single executable for Windows (no Python required).
 - **Privacy Focused**: Microsoft telemetry collection has been removed to avoid execution errors.
+- **Updated Engine (.NET 8):** We have migrated the `SqlToolsService` from .NET Core 3.1 to **.NET 8 (LTS)**.
 
 ---
 
 ## Installation and Usage
 
-### Option 1: Standalone Executable (Recommended for Windows)
+### Option 1: Standalone Executable
+
 Download the latest `mssql-cli-windows.exe` from our [Releases Page](https://github.com/rubgithub/mssql-cli/releases). 
 No Python installation is required. Just download and run:
 ```powershell
@@ -54,7 +56,8 @@ git checkout py311-fix
 uv pip compile pyproject.toml -o requirements.txt
 uv pip sync requirements.txt
 
-uv pip install pyinstaller
+uv pip install pyinstaller requests future
+uv run dev_setup.py
 uv run pyinstaller --onefile --name "mssql-cli" `
     --collect-all "mssqlcli" `
     --add-data "mssqlcli/mssqltoolsservice/bin;mssqlcli/mssqltoolsservice/bin" `
@@ -65,3 +68,18 @@ uv run pyinstaller --onefile --name "mssql-cli" `
 
 
 _The resulting binary will be available in the dist/ folder._	
+
+---
+
+## 🤝 Acknowledgments
+
+This fork was made possible through an intensive technical collaboration with **Gemini (Google’s AI)**. 
+
+The AI acted as a core technical partner in:
+
+* **Architecture Migration:** Planning and executing the jump from the legacy .NET Core 3.1 to the modern **.NET 8 (LTS)**.
+* **CI/CD Automation:** Designing the multi-platform GitHub Actions pipeline to enable simultaneous, automated builds for both **Windows** and **Linux**.
+* **Dependency Resolution:** Troubleshooting the `SqlToolsService` integration and ensuring a seamless transition to a **standalone, self-contained** binary distribution.
+* **Modernization:** Refactoring legacy Python scripts and fixing dependency bottlenecks to ensure full compatibility with **Python 3.10, 3.11, and 3.12**.
+
+---
