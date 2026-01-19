@@ -10,6 +10,12 @@
 
 > **DISCLAIMER:** This project is provided "as is", without warranty of any kind. This fork is not officially affiliated with Microsoft or the original dbcli maintainers.
 
+## ⚠️ Maintenance Policy
+**This fork is strictly for compatibility.** The primary goal of this repository is to ensure `mssql-cli` remains functional and installable on modern Python versions (3.10+). 
+- **No New Features:** There is no intention to add new functionalities or support for new database technologies.
+- **Limited Support:** Support is limited to fixing installation issues and ensuring the tool runs on current Python environments.
+- **Legacy Focus:** This is a "maintenance-only" project to keep a classic tool alive.
+
 [**mssql-cli**](https://github.com/dbcli/mssql-cli) is an interactive command line query tool for SQL Server.
 
 ![mssql-cli Autocomplete](https://github.com/dbcli/mssql-cli/raw/main/screenshots/mssql-cli-autocomplete.gif)
