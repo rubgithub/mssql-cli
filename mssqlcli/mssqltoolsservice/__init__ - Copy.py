@@ -1,37 +1,30 @@
 # Template package that stores native sql tools service binaries during wheel compilation.
-# Files will be dynamically created here and cleaned up after each run. 
+# Files will be dynamically created here and cleaned up after each run.
 
 import os
 import platform
-import sys
+
 
 def get_executable_path():
     """
         Find mssqltoolsservice executable relative to this package.
     """
-    # 1. Verify if it is running inside PyInstaller' executable
-    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-        # No PyInstaller, os arquivos são extraídos para sys._MEIPASS
-        # O caminho será: temp/_MEIxxx/mssqlcli/mssqltoolsservice/bin
-        mssqltoolsservice_base_path = os.path.join(sys._MEIPASS, 'mssqlcli', 'mssqltoolsservice', 'bin')
-    
-    # 2. Keeps the original Debug
-    elif 'MSSQLTOOLSSERVICE_PATH' in os.environ:
+    # Debug mode.
+    if 'MSSQLTOOLSSERVICE_PATH' in os.environ:
         mssqltoolsservice_base_path = os.environ['MSSQLTOOLSSERVICE_PATH']
-    
-    # 3. Keep the original Logic
     else:
+        # Retrieve path to program relative to this package.
         mssqltoolsservice_base_path = os.path.abspath(
             os.path.join(
                 os.path.abspath(__file__),
                 '..',
                 'bin'))
 
-    # Format name based on platform (Mantendo sua lógica original)
+    # Format name based on platform.
     mssqltoolsservice_name = u'MicrosoftSqlToolsServiceLayer{}'.format(
         u'.exe' if (platform.system() == u'Windows') else u'')
 
-    mssqltoolsservice_full_path = os.path.abspath(os.path.join(mssqltoolsservice_base_path, 
+    mssqltoolsservice_full_path = os.path.abspath(os.path.join(mssqltoolsservice_base_path, \
                                                                mssqltoolsservice_name))
 
     if not os.path.exists(mssqltoolsservice_full_path):

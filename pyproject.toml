@@ -26,7 +26,7 @@ dependencies = [
     "pendulum",
     "tabulate",
     "pygments",
-    "applicationinsights",
+    #"applicationinsights",
     "cli-helpers>=2.7.0"
 ]
 

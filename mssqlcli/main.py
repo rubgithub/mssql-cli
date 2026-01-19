@@ -11,7 +11,7 @@ import six
 from mssqlcli.config import config_location
 from mssqlcli.__init__ import __version__
 from mssqlcli.mssqlclioptionsparser import create_parser
-import mssqlcli.telemetry as telemetry_session
+#import mssqlcli.telemetry as telemetry_session
 
 click.disable_unicode_literals_warning = True
 
@@ -50,7 +50,7 @@ def run_cli_with(options):
     mssqlcli = MssqlCli(options)
     try:
         mssqlcli.connect_to_database()
-        telemetry_session.set_server_information(mssqlcli.mssqlcliclient_main)
+        # telemetry_session.set_server_information(mssqlcli.mssqlcliclient_main)
 
         if mssqlcli.interactive_mode:
             mssqlcli.run()
@@ -108,14 +108,16 @@ def display_telemetry_message():
 
 
 def main():
+    mssqlcli_options_parser = create_parser()
+    mssqlcli_options = mssqlcli_options_parser.parse_args(sys.argv[1:])
     try:
-        telemetry_session.start()
-        mssqlcli_options_parser = create_parser()
-        mssqlcli_options = mssqlcli_options_parser.parse_args(sys.argv[1:])
+    #    disable telemetry
+    #    telemetry_session.start()
         run_cli_with(mssqlcli_options)
     finally:
-        # Upload telemetry async in a separate process.
-        telemetry_session.conclude()
+        pass
+    #    # Upload telemetry async in a separate process.
+    #    telemetry_session.conclude()
 
 
 if __name__ == "__main__":
