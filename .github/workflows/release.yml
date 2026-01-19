@@ -1,0 +1,36 @@
+name: Build and Release EXE
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: |
+          uv pip install .
+          uv pip install pyinstaller
+
+      - name: Build Single EXE
+        run: |
+          uv run pyinstaller --onefile --name "mssql-cli-windows" `
+          --collect-all "mssqlcli" `
+          --add-data "mssqlcli/mssqltoolsservice/bin;mssqlcli/mssqltoolsservice/bin" `
+          --hidden-import "pyodbc" `
+          mssqlcli/main.py
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/mssql-cli-windows.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
