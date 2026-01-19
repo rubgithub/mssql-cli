@@ -10,21 +10,37 @@ import utility
 
 install_aliases()
 
-SQLTOOLSSERVICE_RELEASE = "v3.0.0-release.72"
+# SQLTOOLSSERVICE_RELEASE = "v3.0.0-release.72"
+# Supported platform key's must match those in mssqlscript's setup.py.
+# updated releases
+SQLTOOLSSERVICE_RELEASE = "5.0.20251227.1"
 
 SQLTOOLSSERVICE_BASE = os.path.join(utility.ROOT_DIR, 'sqltoolsservice/')
 
-# Supported platform key's must match those in mssqlscript's setup.py.
+SQLTOOLSSERVICE_BASE = os.path.join(utility.ROOT_DIR, 'sqltoolsservice/')
+
+# URLs and file names updates to v5.x
 SUPPORTED_PLATFORMS = {
     'manylinux1_x86_64': SQLTOOLSSERVICE_BASE + 'manylinux1/' +
-                         'Microsoft.SqlTools.ServiceLayer-rhel-x64-netcoreapp3.1.tar.gz',
+                         'Microsoft.SqlTools.ServiceLayer-linux-x64-net8.0.tar.gz',
     'macosx_10_11_intel': SQLTOOLSSERVICE_BASE + 'macosx_10_11_intel/' +
-                          'Microsoft.SqlTools.ServiceLayer-osx-x64-netcoreapp3.1.tar.gz',
+                          'Microsoft.SqlTools.ServiceLayer-osx-x64-net8.0.tar.gz',
     'win_amd64': SQLTOOLSSERVICE_BASE + 'win_amd64/' +
-                 'Microsoft.SqlTools.ServiceLayer-win-x64-netcoreapp3.1.zip',
+                 'Microsoft.SqlTools.ServiceLayer-win-x64-net8.0.zip',
     'win32': SQLTOOLSSERVICE_BASE + 'win32/' +
-             'Microsoft.SqlTools.ServiceLayer-win-x86-netcoreapp3.1.zip'
+             'Microsoft.SqlTools.ServiceLayer-win-x86-net8.0.zip'
 }
+
+#SUPPORTED_PLATFORMS = {
+#    'manylinux1_x86_64': SQLTOOLSSERVICE_BASE + 'manylinux1/' +
+#                         'Microsoft.SqlTools.ServiceLayer-rhel-x64-netcoreapp3.1.tar.gz',
+#    'macosx_10_11_intel': SQLTOOLSSERVICE_BASE + 'macosx_10_11_intel/' +
+#                          'Microsoft.SqlTools.ServiceLayer-osx-x64-netcoreapp3.1.tar.gz',
+#    'win_amd64': SQLTOOLSSERVICE_BASE + 'win_amd64/' +
+#                 'Microsoft.SqlTools.ServiceLayer-win-x64-netcoreapp3.1.zip',
+#    'win32': SQLTOOLSSERVICE_BASE + 'win32/' +
+#             'Microsoft.SqlTools.ServiceLayer-win-x86-netcoreapp3.1.zip'
+#}
 
 TARGET_DIRECTORY = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', 'bin'))
 

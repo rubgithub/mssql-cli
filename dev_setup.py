@@ -5,14 +5,14 @@ import os
 import sys
 import utility
 
-PYTHON = os.getenv('CUSTOM_PYTHON', sys.executable)
+# PYTHON = os.getenv('CUSTOM_PYTHON', sys.executable)
 
 print('Running dev setup...')
 print('Root directory \'%s\'\n' % utility.ROOT_DIR)
 
 # install general requirements.
-utility.exec_command('%s -m pip install --no-cache-dir -r requirements-dev.txt' % PYTHON,
-                     utility.ROOT_DIR)
+#utility.exec_command('%s -m pip install --no-cache-dir -r requirements-dev.txt' % PYTHON,
+#                     utility.ROOT_DIR)
 
 import mssqlcli.mssqltoolsservice.externals as mssqltoolsservice
 

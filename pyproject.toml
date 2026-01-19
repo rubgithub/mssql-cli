@@ -39,13 +39,6 @@ zip-safe = false
 
 [tool.setuptools.package-data]
 "mssqlcli.packages.mssqlliterals" = ["*.json"]
-#"mssqlcli.mssqltoolsservice.bin" = ["*.exe", "*.dll", "*.json"]
-"mssqlcli.mssqltoolsservice" = [
-    "bin/*.exe", 
-    "bin/*.dll", 
-    "bin/*.json",
-    "bin/Windows/x64/*"  # Caso existam subpastas
-]
 
 [tool.setuptools.packages.find]
 include = ["mssqlcli*"]

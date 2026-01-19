@@ -1,4 +1,4 @@
-name: Build and Release EXE
+name: Build and Release
 
 on:
   push:
@@ -7,7 +7,18 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    name: Build for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            artifact_name: mssql-cli-windows.exe
+            path_sep: ";"
+          - os: ubuntu-latest
+            artifact_name: mssql-cli-linux
+            path_sep: ":"
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup uv
@@ -15,22 +26,27 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           uv pip install .
-          uv pip install pyinstaller
+          uv pip install pyinstaller requests future
 
-      - name: Build Single EXE
+      - name: Download binaries
+        run: uv run dev_setup.py
+
+      - name: PyInstaller Build
+        shell: bash
         run: |
-          uv run pyinstaller --onefile --name "mssql-cli-windows" `
-          --collect-all "mssqlcli" `
-          --add-data "mssqlcli/mssqltoolsservice/bin;mssqlcli/mssqltoolsservice/bin" `
-          --hidden-import "pyodbc" `
+          uv run pyinstaller --onefile --name "${{ matrix.artifact_name }}" \
+          --collect-all "mssqlcli" \
+          --add-data "mssqlcli/mssqltoolsservice/bin${{ matrix.path_sep }}mssqlcli/mssqltoolsservice/bin" \
+          --add-data "mssqlcli/packages/mssqlliterals/*.json${{ matrix.path_sep }}mssqlcli/packages/mssqlliterals" \
+          --hidden-import "pyodbc" \
           mssqlcli/main.py
 
-      - name: Upload Release Assets
+      - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/mssql-cli-windows.exe
+          files: dist/${{ matrix.artifact_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
