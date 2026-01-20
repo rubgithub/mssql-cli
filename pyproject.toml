@@ -32,6 +32,7 @@ dependencies = [
 
 [project.scripts]
 mssql-cli = "mssqlcli.main:main"
+mssql-cli-setup = "mssqlcli.mssqltoolsservice.dev_setup:install"
 
 [tool.setuptools]
 include-package-data = true
