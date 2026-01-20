@@ -73,13 +73,7 @@ xattr -d com.apple.quarantine mssql-cli-macos
 ./mssql-cli-linux -S localhost -U sa -C
 ```
 
-### Option 2: Managed Installation via uv
-If you use uv, you can install the tool globally:
-```powershell
-uv tool install git+https://github.com/rubgithub/mssql-cli.git@py311-fix
-```
-
-### Option 3: Building from Source
+### Option 2: Building from Source
 
 ```powershell
 git clone https://github.com/rubgithub/mssql-cli.git
