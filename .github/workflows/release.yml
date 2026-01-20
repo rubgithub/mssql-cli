@@ -3,10 +3,10 @@ name: Build and Release
 on:
   push:
     branches:
-      - py311-fix  # Roda builds de teste neste branch
+      - py311-fix-test  # Run test builds
     tags:
-      - 'v*'      # Roda build e cria release oficial
-  workflow_dispatch: # Permite rodar manualmente pelo botão no GitHub Actions
+      - 'v*'      # Run build and create release
+  workflow_dispatch: # Manually run GitHub Actions
 
 jobs:
   build:
@@ -65,7 +65,7 @@ jobs:
           echo "Binary validation successful on ${{ matrix.os }}!"
 
       - name: Release
-        # Esta trava garante que só cria a release se houver uma TAG (v1.0.0, etc)
+        # Create release when TAG (v1.0.0, etc)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
